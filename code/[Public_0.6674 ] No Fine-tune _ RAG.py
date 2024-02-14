@@ -4,6 +4,13 @@
 # In[7]:
 
 
+'''
+pip install langchain
+pip install langchain-community
+pip install sentence-transformers
+pip install faiss-gpu
+'''
+
 import pickle
 import pandas as pd
 from tqdm import tqdm
@@ -83,12 +90,6 @@ db.save_local(dir + "faiss_index")
 db = FAISS.load_local(dir + "faiss_index", embeddings)
 
 
-# In[ ]:
-
-
-
-
-
 # In[22]:
 
 
@@ -109,7 +110,7 @@ model = LlamaForCausalLM.from_pretrained(model_id).to(0)
 # In[26]:
 
 
-pipe = pipeline("text-generation", model=model, tokenizer=tokenizer, max_new_tokens=512,device=0)
+pipe = pipeline("text-generation", model=model, tokenizer=tokenizer, max_new_tokens=256,device=0)
 hf = HuggingFacePipeline(pipeline=pipe)
 
 
